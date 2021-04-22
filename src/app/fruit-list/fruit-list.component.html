@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 style="color: white">Movies database</h1>
+  <div class="row">
+    <div class="col-9 d-flex align-items-start justify-content-center">
+      <mat-form-field appearance="fill" class="pr-2 w-50">
+        <mat-label>Name</mat-label>
+        <input matInput />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="pr-2 w-50">
+        <mat-label>Description</mat-label>
+        <input matInput />
+      </mat-form-field>
+    </div>
+
+    <div class="col-3 pt-2 d-flex align-items-start justify-content-between">
+      <button mat-raised-button color="primary">Add Fruit</button>
+      <button mat-raised-button color="warn">Logout</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <table mat-table [dataSource]="fruit" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let fruit">{{ fruit.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Director</th>
+        <td mat-cell *matCellDef="let fruit">{{ fruit.description }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
