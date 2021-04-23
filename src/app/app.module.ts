@@ -12,8 +12,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FruitListComponent } from './fruit-list/fruit-list.component';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { APP_INITIALIZER } from '@angular/core';
+import { initializeKeycloak } from './init/keycloak-init.factory';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 
 @NgModule({
   declarations: [AppComponent, FruitListComponent],
@@ -29,8 +32,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSnackBarModule,
     MatInputModule,
     NgbModule,
+    KeycloakAngularModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

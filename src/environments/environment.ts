@@ -5,6 +5,9 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api/fruits/',
+  authUrl: 'http://localhost:8180/auth',
+  realm: 'codecta',
+  clientId: 'angular-auth',
 };
 
 /*

@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+import { KeycloakService } from 'keycloak-angular';
 import { Fruit } from '../_models/fruit';
+import { FruitService } from '../_services/fruit.service';
 
 @Component({
   selector: 'app-fruit-list',
@@ -8,29 +11,34 @@ import { Fruit } from '../_models/fruit';
   styleUrls: ['./fruit-list.component.css'],
 })
 export class FruitListComponent implements OnInit {
-  fruit: Fruit[] = [
-    {
-      id: 1,
-      name: 'Apple',
-      description: 'appledesc',
-    },
-    {
-      id: 2,
-      name: 'Strawberry',
-      description: 'strawberry description',
-    },
-    {
-      id: 3,
-      name: 'Banana',
-      description: 'strawberry description',
-    },
-  ];
+  public fruits: Fruit[];
 
   displayedColumns: string[] = ['name', 'description'];
 
   @ViewChild(MatTable) table: MatTable<any>;
 
-  constructor() {}
+  constructor(
+    private fruitService: FruitService,
+    private keycloakService: KeycloakService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getFruit();
+  }
+
+  public getFruit(): void {
+    this.fruitService.getFruit().subscribe(
+      (res: Fruit[]) => {
+        this.fruits = res;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    );
+  }
+
+  logout() {
+    this.keycloakService.logout();
+  }
+
 }

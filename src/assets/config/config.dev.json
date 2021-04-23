@@ -1,0 +1,5 @@
+{
+  "KEYCLOAK_URL": "http://localhost:8180",
+  "KEYCLOAK_REALM": "codecta",
+  "KEYCLOAK_CLIENT_ID": "angular-auth"
+}
