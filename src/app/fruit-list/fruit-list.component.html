@@ -1,19 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col-9 d-flex align-items-start justify-content-center">
-      <mat-form-field appearance="fill" class="pr-2 w-50">
-        <mat-label>Name</mat-label>
-        <input matInput />
-      </mat-form-field>
+    <div class="col-10 d-flex align-items-start justify-content-center">
+      <form class="w-100" #fruitForm="ngForm" (ngSubmit)="addFruit()">
+        <mat-form-field appearance="fill" class="pr-2">
+          <mat-label>Name</mat-label>
+          <input name="name" matInput [(ngModel)]="model.name" />
+        </mat-form-field>
 
-      <mat-form-field appearance="fill" class="pr-2 w-50">
-        <mat-label>Description</mat-label>
-        <input matInput />
-      </mat-form-field>
+        <mat-form-field appearance="fill" class="pr-2">
+          <mat-label>Description</mat-label>
+          <input name="description" matInput [(ngModel)]="model.description" />
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary">
+          Add Fruit
+        </button>
+      </form>
     </div>
 
-    <div class="col-3 pt-2 d-flex align-items-start justify-content-between">
-      <button mat-raised-button color="primary">Add Fruit</button>
+    <div class="col-2 pt-2 d-flex align-items-start justify-content-between">
       <button mat-raised-button color="warn" (click)="logout()">Logout</button>
     </div>
   </div>

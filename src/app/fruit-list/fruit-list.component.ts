@@ -17,6 +17,12 @@ export class FruitListComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
 
+  model: Fruit = {
+    id: 0,
+    name: '',
+    description: '',
+  };
+
   constructor(
     private fruitService: FruitService,
     private keycloakService: KeycloakService
@@ -37,8 +43,20 @@ export class FruitListComponent implements OnInit {
     );
   }
 
+  public addFruit(): void {
+    if (this.model.name.length > 0 && this.model.description.length > 0)
+      this.fruitService.addFruit(this.model).subscribe(
+        (res) => {
+          console.log(res);
+          this.getFruit();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
   logout() {
     this.keycloakService.logout();
   }
-
 }
